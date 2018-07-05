@@ -8,7 +8,7 @@ namespace ccmockingservice.Validator
     public interface ICreditCardValidator
     {
         bool IsCorrectFormat(CreditCardDTO creditCardDTO);
-        bool IsExist(CreditCardDTO creditCardDTO);
+        //bool IsExist(CreditCardDTO creditCardDTO);
         ValidationResult ValidationResult(CreditCardDTO creditCardDTO);
     }
 }

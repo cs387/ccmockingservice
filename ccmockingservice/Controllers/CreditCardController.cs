@@ -8,17 +8,49 @@ using System.Web.Http.Description;
 using ccmockingservice.Models;
 using ccmockingservice.Utils;
 using ccmockingservice.Validator;
+using ccmockingservice.DAL;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace ccmockingservice.Controllers
 {
     public class CreditCardController : ApiController
     {
         AbstractCreditCard _ccobj;
+        CCServiceDBContext _dbContext;
         public CreditCardController() { }
-
+        
+        public CreditCardController(AbstractCreditCard CCObj)
+        {
+           
+            this._ccobj = CCObj;
+        }
         public CreditCardController(CreditCardDTO creditCardDTO)
         {
+            
             initCreditCardType(creditCardDTO);
+        }
+
+        public bool IsExist(CreditCardDTO creditCardDTO)
+        {
+            using (var context = new CCServiceDBContext())
+            {
+                var returnCodeValue = 0;
+                var clientIdParameter = new SqlParameter("@Number", creditCardDTO.Number);
+                var returnCode = new SqlParameter("@ReturnCode", SqlDbType.Int);
+                returnCode.Direction = ParameterDirection.Output;
+
+
+                var sql = "exec @ReturnCode = CheckCardExist @Number";
+                var data = context.Database.SqlQuery<object>(sql, returnCode, clientIdParameter);
+
+                var item = data.FirstOrDefault();
+
+                returnCodeValue = (int)returnCode.Value;
+
+                return returnCodeValue == 1;
+
+            }
         }
 
         private void initCreditCardType(CreditCardDTO creditCardDTO)
@@ -39,11 +71,12 @@ namespace ccmockingservice.Controllers
             else _ccobj = new Unknown();
         }
 
-        //[ResponseType(typeof(ValidationResult))]
-        //public IHttpActionResult Get(int id, string dd)
-        //{
-        //    return Ok(new ValidationResult { CardType = "icenaja"+id, Result = "ofcourseValid"+dd });
-        //}
+        public ValidationResult FetchValidationResult(CreditCardDTO creditCardDTO)
+        {
+            return (_ccobj.ValidationResult(creditCardDTO));
+        }
+
+
 
         [ResponseType(typeof(ValidationResult))]
         public IHttpActionResult Get(string CreditCardNumber, string Expiry)
@@ -53,7 +86,11 @@ namespace ccmockingservice.Controllers
             {
                 var cc = new CreditCardDTO { Number= CreditCardNumber, Expiry= Expiry };
                 initCreditCardType(cc);
-                return Ok(_ccobj.ValidationResult(cc));
+                var ValResult = FetchValidationResult(cc);
+                if (ValResult.Result == GlobalVariables.ValidResult)
+                    if (!IsExist(cc))
+                        ValResult.Result = GlobalVariables.NotExistResult;
+                return Ok(ValResult);
             }
             catch (Exception e)
             {

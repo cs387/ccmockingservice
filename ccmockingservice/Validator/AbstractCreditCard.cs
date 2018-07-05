@@ -23,28 +23,7 @@ namespace ccmockingservice.Validator
         {
             return IsValidExpiry(creditCardDTO);
         }
-
-        public bool IsExist(CreditCardDTO creditCardDTO)
-        {
-            using (var context = new CCServiceDBContext())
-            {
-                var returnCodeValue = 0;
-                var clientIdParameter = new SqlParameter("@Number", creditCardDTO.Number);
-                var returnCode = new SqlParameter("@ReturnCode", SqlDbType.Int);
-                returnCode.Direction = ParameterDirection.Output;
-
-
-                var sql = "exec @ReturnCode = CheckCardExist @Number";
-                var data = context.Database.SqlQuery<object>(sql, returnCode, clientIdParameter);
-
-                var item = data.FirstOrDefault();
-
-                returnCodeValue = (int)returnCode.Value;
-
-                return returnCodeValue == 1;
-
-            }
-        }
+               
 
         public abstract ValidationResult ValidationResult(CreditCardDTO creditCardDTO);
         

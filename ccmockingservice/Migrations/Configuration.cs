@@ -28,16 +28,16 @@ namespace ccmockingservice.Migrations
 
         }
 
-        private CreditCard[] generateCreditCards(int startWith, int length)
+        private CreditCardEntity[] generateCreditCards(int startWith, int length)
         {
 
             int count = 4;
 
-            CreditCard[] arrCreditCards = new CreditCard[count];
+            CreditCardEntity[] arrCreditCards = new CreditCardEntity[count];
             for (int i = 0; i < count; i++)
             {
                 var genToken = generateCreditCardNumber(startWith, length);
-                arrCreditCards[i] = new CreditCard { Number = genToken };
+                arrCreditCards[i] = new CreditCardEntity { Number = genToken };
 
             }
             return arrCreditCards;

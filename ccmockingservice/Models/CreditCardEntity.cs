@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 namespace ccmockingservice.Models
 {
-    public class CreditCard
+    public class CreditCardEntity
     {
         public int ID { get; set; }
 

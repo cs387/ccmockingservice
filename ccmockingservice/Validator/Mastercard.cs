@@ -28,9 +28,7 @@ namespace ccmockingservice.Validator
         {
             var result = "";
             if (this.IsCorrectFormat(creditCardDTO))
-                if (IsExist(creditCardDTO))
-                    result = GlobalVariables.ValidResult;
-                else result = GlobalVariables.NotExistResult;
+                result = GlobalVariables.ValidResult;
             else result = GlobalVariables.InvalidResult;
             return new ValidationResult { CardType = this.GetType().Name, Result = result };
 

@@ -9,13 +9,13 @@ namespace ccmockingservice.DAL
         {
 
         }
-        public virtual DbSet<CreditCard> CreditCards { get; set; }
+        public virtual DbSet<CreditCardEntity> CreditCards { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
-            modelBuilder.Entity<CreditCard>()
+            modelBuilder.Entity<CreditCardEntity>()
             .HasIndex(p => p.Number)            
             .IsUnique();
 

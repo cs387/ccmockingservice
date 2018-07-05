@@ -113,8 +113,12 @@
     <Compile Include="Migrations\201807042234467_create.Designer.cs">
       <DependentUpon>201807042234467_create.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807050343133_changeDBName.cs" />
+    <Compile Include="Migrations\201807050343133_changeDBName.Designer.cs">
+      <DependentUpon>201807050343133_changeDBName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\CreditCard.cs" />
+    <Compile Include="Models\CreditCardEntity.cs" />
     <Compile Include="Models\CreditCardDTO.cs" />
     <Compile Include="Validator\Amex.cs" />
     <Compile Include="Validator\JCB.cs" />
@@ -142,6 +146,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201807042234467_create.resx">
       <DependentUpon>201807042234467_create.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807050343133_changeDBName.resx">
+      <DependentUpon>201807050343133_changeDBName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
