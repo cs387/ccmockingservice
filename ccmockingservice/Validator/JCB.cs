@@ -1,0 +1,34 @@
+﻿using ccmockingservice.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Web;
+using ccmockingservice.Utils;
+namespace ccmockingservice.Validator
+{
+    public class JCB : AbstractCreditCard
+    {
+        public override bool IsCorrectFormat(CreditCardDTO creditCardDTO)
+        {
+            var isValidExpiry = base.IsCorrectFormat(creditCardDTO);
+
+            Regex reg = new Regex(@"^3\d{15}$");
+            Match ismatch = reg.Match(creditCardDTO.Number);
+
+            return ismatch.Success && isValidExpiry;
+        }
+
+        public override ValidationResult ValidationResult(CreditCardDTO creditCardDTO)
+        {
+            var result = "";
+            if (this.IsCorrectFormat(creditCardDTO))
+                if (IsExist(creditCardDTO))
+                    result = GlobalVariables.ValidResult;
+                else result = GlobalVariables.NotExistResult;
+            else result = GlobalVariables.InvalidResult;
+            return new ValidationResult { CardType = this.GetType().Name, Result = result };
+
+        }
+    }
+}

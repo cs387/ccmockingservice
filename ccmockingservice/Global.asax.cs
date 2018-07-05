@@ -1,4 +1,5 @@
 ﻿using ccmockingservice.DAL;
+using Swashbuckle.Application;
 using System.Web.Http;
 
 
@@ -9,8 +10,7 @@ namespace ccmockingservice
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            //System.Data.Entity.Database.SetInitializer(new DatabaseInitializer());
-
+           
         }
     }
 }

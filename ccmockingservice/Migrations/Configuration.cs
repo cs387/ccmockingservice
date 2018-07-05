@@ -20,7 +20,6 @@ namespace ccmockingservice.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
-
             context.CreditCards.AddOrUpdate(p => p.Number, generateCreditCards(4, 16)); //visa
             context.CreditCards.AddOrUpdate(p => p.Number, generateCreditCards(5, 16)); //mastercard
             context.CreditCards.AddOrUpdate(p => p.Number, generateCreditCards(3, 15)); //amex
@@ -31,7 +30,7 @@ namespace ccmockingservice.Migrations
 
         private CreditCard[] generateCreditCards(int startWith, int length)
         {
-           
+
             int count = 4;
 
             CreditCard[] arrCreditCards = new CreditCard[count];
@@ -39,7 +38,7 @@ namespace ccmockingservice.Migrations
             {
                 var genToken = generateCreditCardNumber(startWith, length);
                 arrCreditCards[i] = new CreditCard { Number = genToken };
-                
+
             }
             return arrCreditCards;
 

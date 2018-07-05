@@ -12,5 +12,6 @@ namespace ccmockingservice.Models
         [RegularExpression("^[0-9]*$", ErrorMessage = "Number must be numeric")]
         public string Number { get; set; }
 
+
     }
 }

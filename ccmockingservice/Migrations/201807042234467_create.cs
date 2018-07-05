@@ -13,7 +13,6 @@ namespace ccmockingservice.Migrations
                     {
                         ID = c.Int(nullable: false, identity: true),
                         Number = c.String(nullable: false, maxLength: 16),
-                        Expiry = c.String(nullable: false, maxLength: 6),
                     })
                 .PrimaryKey(t => t.ID)
                 .Index(t => t.Number, unique: true);

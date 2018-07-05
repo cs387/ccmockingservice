@@ -7,13 +7,13 @@ namespace ccmockingservice.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class dropExpiry : IMigrationMetadata
+    public sealed partial class create : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(dropExpiry));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(create));
         
         string IMigrationMetadata.Id
         {
-            get { return "201807041958514_dropExpiry"; }
+            get { return "201807042234467_create"; }
         }
         
         string IMigrationMetadata.Source

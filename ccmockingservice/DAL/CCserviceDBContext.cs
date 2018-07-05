@@ -16,7 +16,7 @@ namespace ccmockingservice.DAL
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
             modelBuilder.Entity<CreditCard>()
-            .HasIndex(p => p.Number)
+            .HasIndex(p => p.Number)            
             .IsUnique();
 
 
