@@ -5,7 +5,6 @@ Checking if credit card number is valid following the pattern of each type of Cr
 if valid then checking for it existence in DB
 
 Parameters are CreditCardNumber, Expiry
+Expiry is also verified firs if it's correct pattern = MMYYYY (all numeric value and MM only start with 0,1 otherwise invalid)
 
- <param name="CreditCardNumber">only number</param>
- <param name="Expiry">only number MMYYYY, MM only start with 0,1 otherwise notvalid</param>
 
